@@ -51,7 +51,6 @@ void Solution::replaceSpace(char * str, int length)
 }
 
 
-
 vector<int> Solution::printListFromTailToHead(ListNode * head)
 {
 	if (nullptr == head)
@@ -78,3 +77,96 @@ vector<int> Solution::printListFromTailToHead(ListNode * head)
 
 	return resultVector;
 }
+
+vector<int> Solution::printListFromTailToHead_recursive(ListNode * head)
+{
+	ListNode* tempNode = head;
+	if (tempNode != nullptr && tempNode->next != nullptr)
+	{
+		printListFromTailToHead_recursive(tempNode->next);
+	}
+	cout << tempNode->val << endl;
+	printListFromTailToHead_recursive_result.push_back(tempNode->val);
+	return printListFromTailToHead_recursive_result;
+}
+
+
+TreeNode * Solution::reConstructBinaryTree(vector<int> pre, vector<int> vin)
+{
+	if (0 == pre.size())
+	{
+		return nullptr;
+	}
+	TreeNode* tempNode = new TreeNode(pre[0]);
+	cout << tempNode->val;
+	if (1 == pre.size())
+	{
+		return tempNode;
+	}
+
+	int indexVin = 0;
+	for (int i = 0; i < vin.size(); i++) 
+	{
+		if (vin[i] == pre[0])
+		{
+			indexVin = i;
+			break;
+		}
+	}
+	
+	int indexPre = 0;
+	for (int i = 0; i < pre.size(); i++)
+	{
+		for (int j = 0; j <= indexVin; j++)
+		{
+			if (pre[i] == vin[j])
+			{
+				//下一代vin中有pre[i]
+				break;
+			}
+			if (pre[i] != vin[j] && j == indexVin)
+			{
+				indexPre = i;
+			}
+		}
+		if (indexPre != 0)
+		{
+			break;
+		}
+	}
+	/*cout << "indexPre:" << indexPre << endl;
+	for (auto ele : vector<int>(pre.begin() + indexPre, pre.end()))
+	{
+		cout << ele << ",";
+	}
+	cout << endl;
+	cout << "indexVin:" << indexVin << endl;
+	for (auto ele : vector<int>(vin.begin() + indexVin + 1, vin.end()))
+	{
+		cout << ele << ",";
+	}
+	cout << endl;*/
+
+	cout << "indexVin" << indexVin << endl;
+	
+	if (indexVin == vin.size() - 1) //只有左子树
+	{
+		cout << "只有左子树" << endl;
+		tempNode->left = reConstructBinaryTree(vector<int>(pre.begin() + 1, pre.end()), vector<int>(vin.begin(), vin.end() - 1));
+	}
+	else if (indexVin == 0) //只有右子树
+	{
+		cout << "只有右子树" << endl;
+		tempNode->right = reConstructBinaryTree(vector<int>(pre.begin() + 1, pre.end()), vector<int>(vin.begin() + 1, vin.end()));
+	}
+	else //左右子树都有
+	{
+		cout << "存在左子树" << endl;
+		tempNode->left = reConstructBinaryTree(vector<int>(pre.begin() + 1, pre.begin() + indexPre), vector<int>(vin.begin(), vin.begin() + indexVin));
+		cout << "存在右子树" << endl;
+		tempNode->right = reConstructBinaryTree(vector<int>(pre.begin() + indexPre, pre.end()), vector<int>(vin.begin() + indexVin + 1, vin.end()));
+	}
+
+	return tempNode;
+}
+
