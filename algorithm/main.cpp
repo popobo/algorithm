@@ -30,12 +30,22 @@ int main()
 	solution.printListFromTailToHead_recursive(head->next);
 	*/
 
-	vector<int> pre{ 1, 2, 4, 7, 3, 5, 6, 8 };
+	/*vector<int> pre{ 1, 2, 4, 7, 3, 5, 6, 8 };
 	vector<int> mid{ 4, 7 ,2, 1, 5, 3, 8, 6 };
 	TreeNode* root = solution.reConstructBinaryTree(pre,mid);
 	
 	print_tree(root);
-
+	*/
+	
+	solution.push(1);
+	solution.push(2);
+	solution.push(3);
+	cout << solution.pop() << endl;
+	cout << solution.pop() << endl;
+	solution.push(4);
+	cout << solution.pop() << endl;
+	cout << solution.pop() << endl;
+	
 	system("pause");
 	
 	return 0;

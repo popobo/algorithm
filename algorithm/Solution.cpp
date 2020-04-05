@@ -170,3 +170,44 @@ TreeNode * Solution::reConstructBinaryTree(vector<int> pre, vector<int> vin)
 	return tempNode;
 }
 
+void Solution::push(int node)
+{
+	stack1.push(node);
+}
+
+int Solution::pop()
+{
+	int val = 0;
+	if (stack1.size() == 0 && stack2.size() == 0)
+	{
+		return 0;
+	}
+	if(stack1.size() == 1 && stack2.size() == 0)
+	{
+		//top（）是取出栈顶元素，不会删掉栈里边的元素
+		//pop（）是删除栈顶元素
+		val = stack1.top();
+		stack1.pop();
+		return val;
+	}
+	if (stack2.size() >= 1)
+	{
+		val = stack2.top();
+		stack2.pop();
+		return val;
+	}
+	if (stack1.size() > 1 && stack2.size() == 0)
+	{
+		while (!stack1.empty())
+		{
+			val = stack1.top();
+			stack2.push(val);
+			stack1.pop();
+		}
+		val = stack2.top();
+		stack2.pop();
+		return val;
+	}
+	return 0;
+}
+
