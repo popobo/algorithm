@@ -211,3 +211,25 @@ int Solution::pop()
 	return 0;
 }
 
+int Solution::minNumberInRotateArray(vector<int> rotateArray)
+{
+	if (rotateArray.size() == 0)
+	{
+		return 0;
+	}
+	int minNumIndex = 0;
+	int minNum = rotateArray[0];
+
+	for (int i = 0; i < rotateArray.size(); i++)
+	{
+		if (rotateArray[i] < minNum)
+		{
+			minNum = rotateArray[i];
+			minNumIndex = i;
+			break;
+		}
+	}
+
+	return minNum;
+}
+

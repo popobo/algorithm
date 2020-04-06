@@ -18,8 +18,11 @@ public:
 	
 	//用两个栈实现队列
 	void push(int node);
-
 	int pop();
+	
+	//旋转数组的最小数字
+	int minNumberInRotateArray(vector<int> rotateArray);
+
 private:
 	stack<int> stack1;
 	stack<int> stack2;

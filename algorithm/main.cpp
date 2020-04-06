@@ -37,7 +37,7 @@ int main()
 	print_tree(root);
 	*/
 	
-	solution.push(1);
+	/*solution.push(1);
 	solution.push(2);
 	solution.push(3);
 	cout << solution.pop() << endl;
@@ -45,6 +45,9 @@ int main()
 	solution.push(4);
 	cout << solution.pop() << endl;
 	cout << solution.pop() << endl;
+	*/
+	vector<int> rot{ 3, 4, 5, 6, 7, 1, 2 };
+	cout << solution.minNumberInRotateArray(rot) << endl;
 	
 	system("pause");
 	
