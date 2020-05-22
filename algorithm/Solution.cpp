@@ -233,3 +233,243 @@ int Solution::minNumberInRotateArray(vector<int> rotateArray)
 	return minNum;
 }
 
+int Solution::Fibonacci(int n)
+{	
+	int num1 = 0;
+	int num2 = 1;
+	int temp = 0;
+	if (0 == n)
+	{
+		return num1;
+	}
+	if (1 == n)
+	{
+		return num2;
+	}
+	for (int i = 0; i < n - 1; i++)
+	{
+		temp = num1 + num2;
+		num1 = num2;
+		num2 = temp;
+	}
+	return num2;
+}
+
+
+int directions[24][2] = { {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1},
+						  {2, 0}, {2, -2}, {0, -2}, {-2, -2}, {-2, 0}, {-2, 2}, {0, 2}, {2, 2},
+						  {1, 2}, {2, 1}, {2, -1}, {1, -2}, {-1, -2}, {-2, -1}, {-2, 1}, {-1, 2} };
+
+
+int isVisit[3][3] = { 0 };
+
+bool canVisit(int x, int y, int xMove, int yMove)
+{
+	//坐标超出范围非法
+	if (x + xMove > 2 || x + xMove < 0 || y + yMove > 2 || y + yMove < 0)
+	{
+		return false;
+	}
+
+	//如果在模式中连接两个连续键的行通过任何其他键，则其他键必须在模式中选择，不允许跳过非选择键
+	if ((xMove * xMove + yMove * yMove) == 4 || (xMove * xMove + yMove * yMove) == 8)
+	{
+		if (0 == isVisit[(xMove + x) / 2][(yMove + y) / 2])
+		{
+			return false;
+		}
+	}
+	
+	if ((xMove * xMove + yMove * yMove) == 5)
+	{
+		return true;
+	}
+
+	if (1 == isVisit[x + xMove][y + yMove])
+	{
+		return false;
+	}
+
+	return true;
+}
+
+int result = 0;
+
+//x, y当前坐标，xMove, yMove移动目标方向
+void dfs(int x, int y, int xMove, int yMove, int pointsLeft)
+{	
+	//cout << "x:" << x << " y:" << y << " xMove:" << xMove << " yMove:" << yMove << endl;
+	if (!canVisit(x, y, xMove, yMove)) 
+	{
+		return;
+	}
+
+	if (1 == pointsLeft)
+	{
+		//cout << "successful way x:" << x << " y:" << y << " xMove:" << xMove << " yMove:" << yMove << endl;
+		//isVisit[x][y] = 0;
+		result++;
+		return;
+	}
+
+	isVisit[x + xMove][y + yMove] = 1;
+	for (int i = 0; i < 24; i++)
+	{
+		dfs(x + xMove, y + yMove, directions[i][0], directions[i][1], pointsLeft - 1);
+	}
+	isVisit[x][y] = 0;
+	return;
+}
+
+void initIsVisit()
+{
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			isVisit[i][j] = 0;
+		}
+	}
+}
+
+int Solution::android_unlock_modules(int m, int n)
+{	
+	int isVisit[3][3] = { 0 };
+	for (int u = m; u < n + 1; u++)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				if (u == 1)
+				{
+					result += 1;
+					continue;
+				}
+				isVisit[i][j] = 1;
+				for (int k = 0; k < 24; k++)
+				{
+					dfs(i, j, directions[k][0], directions[k][1], u - 1);
+					initIsVisit();
+				}
+			}
+		}
+	}
+	
+	return result;
+}
+
+int Solution::jumpFloor(int number)
+{
+	int sN_2 = 1;
+	int sN_1 = 2;
+	int sN = 0;
+	
+	if (1 == number)
+	{
+		return sN_1;
+	}
+
+	if (2 == number)
+	{
+		return sN_2;
+	}
+
+	for (int i = 0; i < number - 2; i++)
+	{
+		sN = sN_1 + sN_2;
+		sN_2 = sN_1;
+		sN_1 = sN;
+	}
+
+	return sN;
+}
+
+
+
+int Solution::jumpFloorII(int number)
+{
+	int	iResult = 0;
+	if (number == 0)
+	{
+		return 0;
+	}
+
+	for (int i = 1; i < number; i++)
+	{
+		iResult += jumpFloorII(number - i);
+	}
+
+	iResult++;
+
+	return iResult;
+}
+
+int Solution::rectCover(int number)
+{
+	int num1 = 1;
+	int num2 = 2;
+	int temp = 0;
+	if (0 == number)
+	{
+		return 0;
+	}
+	if (1 == number)
+	{
+		return 1;
+	}
+	if (2 == number)
+	{
+		return 2;
+	}
+	for (int i = 0; i < number - 2; i++)
+	{
+		temp = num1 + num2;
+		num1 = num2;
+		num2 = temp;
+	}
+	return num2;
+}
+
+int Solution::NumberOf1(long n)
+{
+	long num = abs(n);
+	cout << n << endl;
+
+	if (0 == num)
+	{
+		return 0;
+	}
+
+	int oneCount = 0;
+	int totalCount = 0;
+
+	while (true)
+	{
+		totalCount++;
+		if (num % 2 == 1)
+		{
+			oneCount++;
+		}
+		num = num / 2;
+		cout << num << endl;
+		if (1 == num)
+		{
+			oneCount++;
+			break;
+		}
+		Sleep(100);
+	}
+	if (n < 0)
+	{
+		oneCount = totalCount - oneCount;
+	}
+
+	return oneCount;
+}
+
+char * Solution::Serialize(TreeNode * root)
+{			
+	
+	return nullptr;
+}

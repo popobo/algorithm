@@ -3,8 +3,11 @@
 #include <string.h>
 #include "ListNode.h"
 #include "TreeNode.h"
+#include <cmath>
 
 using namespace std;
+
+#define INT_MIN (-2147483647 - 1)
 
 int main()
 {
@@ -46,9 +49,27 @@ int main()
 	cout << solution.pop() << endl;
 	cout << solution.pop() << endl;
 	*/
-	vector<int> rot{ 3, 4, 5, 6, 7, 1, 2 };
-	cout << solution.minNumberInRotateArray(rot) << endl;
+
+	/*vector<int> rot{ 3, 4, 5, 6, 7, 1, 2 };
+	cout << solution.minNumberInRotateArray(rot) << endl;*/
 	
+	/*for (int i = 0; i < 10; i++)
+	{
+		cout << solution.Fibonacci(i) << endl;
+	}*/
+
+	/*int result = solution.android_unlock_modules(4, 4);*/
+
+	/*int result = solution.jumpFloorII(5);*/
+
+	/*int result = solution.rectCover(2);*/
+
+	int input = 2147483648;
+
+	int result = solution.NumberOf1(INT_MIN);
+
+	cout << result << endl;
+
 	system("pause");
 	
 	return 0;
