@@ -1,5 +1,8 @@
 #include <iostream>
 #include <string.h>
+#include <string>
+#include <sstream>
+#include <queue>
 #include "Solution.h"
 
 using namespace std;
@@ -468,8 +471,439 @@ int Solution::NumberOf1(long n)
 	return oneCount;
 }
 
-char * Solution::Serialize(TreeNode * root)
-{			
+static string resultString;
+
+//中序序列化
+string Solution::Serialize(TreeNode * root)
+{
+	cout << "Serialize" << endl;
+	if (nullptr == root->left && nullptr == root->right)
+	{
+		resultString.append(to_string(root->val)).append("!");
+		return string();
+	}
+	if (root->left)
+	{
+		Serialize(root->left);
+	}
+	else
+	{
+		resultString.append("#");
+	}
+	resultString.append(to_string(root->val)).append("!");
+	if (root->right)
+	{
+		Serialize(root->right);
+	}
+	else
+	{
+		resultString.append("#");
+	}
+	return resultString;
+}
+
+TreeNode * Solution::Deserialize(char * str)
+{
+	int strLen = strlen(str);
 	
+
 	return nullptr;
+}
+
+ListNode * Solution::ReverseList(ListNode * pHead)
+{
+	ListNode* temp = pHead;
+		
+	stack<int> stack;
+	while (temp != nullptr)
+	{
+		stack.push(temp->val);
+		temp = temp->next;
+	}
+	
+	temp = pHead;
+	while (!stack.empty())
+	{
+		temp->val = stack.top();
+		stack.pop();
+		temp = temp->next;
+	}
+
+	return pHead;
+}
+
+double Solution::Power(double base, int exponent)
+{
+	double result = base;
+	int temp = exponent;
+
+	if (abs(base) < 1e-6)
+	{
+		return 0.0;
+	}
+
+	if (exponent == 0)
+	{
+		return 1;
+	}
+
+	if (exponent < 0)
+	{
+		exponent = -exponent;
+	}
+	
+	while (exponent > 0)
+	{
+		if (exponent & 1 == 1)
+		{
+			//奇数
+			result *= base;
+		}
+		exponent >>= 1;
+		result *= result;
+	}
+
+	return temp > 0 ? result : (1 / result);
+}
+
+void Solution::reOrderArray(vector<int>& array)
+{
+	vector<int> odd;
+	vector<int> event;
+	for (auto& a : array)
+	{
+		if (a % 2 != 0)
+		{
+			odd.push_back(a);
+		}
+		else
+		{
+			event.push_back(a);
+		}
+	}
+	
+	int i = 0;
+	for (auto& o : odd)
+	{
+		array[i++] = o;
+	}
+	for (auto& e : event)
+	{
+		array[i++] = e;
+	}
+}
+
+ListNode * Solution::FindKthToTail(ListNode * pListHead, unsigned int k)
+{
+	vector<ListNode*> temp;
+	if (!pListHead)
+	{
+		return nullptr;
+	}
+	while (pListHead != nullptr)
+	{
+		temp.push_back(pListHead);
+		pListHead = pListHead->next;
+	}
+	int iTemp = static_cast<int>(temp.size());
+	if (iTemp - k - 1 < 0)
+	{
+		return nullptr;
+	}
+	if (temp.size() - k - 1 >= temp.size())
+	{
+		return nullptr;
+	}
+	return temp.at(temp.size() - k - 1);
+}
+
+ListNode * Solution::EntryNodeOfLoop(ListNode * pHead)
+{
+	if (nullptr == pHead)
+	{
+		return nullptr;
+	}
+	bool bLoop = false;
+	ListNode * slow = pHead;
+	ListNode * fast = pHead;
+	
+	while (slow != nullptr && fast != nullptr && fast->next != nullptr)
+	{
+		
+		slow = slow->next;
+		fast = fast->next->next;
+		if (slow == fast)
+		{
+			//走到了相同的节点代表有环
+			bLoop = true;
+			break;
+		}
+	}
+	if (!bLoop)
+	{
+		return nullptr;
+	}
+
+	ListNode * temp = pHead;
+	while (temp != slow)
+	{
+		temp = temp->next;
+		slow = slow->next;
+	}
+
+	return temp;
+}
+
+
+vector<int> Solution::divingBoard(int shorter, int longer, int k)
+{
+	vector<int> divingBoardResult;
+	if (0 == k)
+	{
+		return divingBoardResult;
+	}
+
+	for (int i = 0; i <= k; i++)
+	{
+		if (shorter == longer)
+		{
+			divingBoardResult.push_back(k * shorter);
+			break;
+		}
+		else
+		{
+			divingBoardResult.push_back(i * longer + (k - i) * shorter);
+		}
+	}
+
+	return divingBoardResult;
+}
+
+bool Solution::findNumberIn2DArray(vector<vector<int>>& matrix, int target)
+{
+
+	for (auto ritOutside = matrix.rbegin(); ritOutside != matrix.rend();)
+	{
+		for (auto ritInside = ritOutside->rbegin(); ritInside != ritOutside->rend();)
+		{
+			if (target == *ritInside)
+			{
+				return true;
+			}
+			if (target > *ritInside)
+			{
+				break;
+			}
+			else
+			{
+				ritInside++;
+			}
+		}
+		ritOutside++;
+	}
+
+	return false;
+}
+
+vector<string> Solution::buildArray(vector<int>& target, int n)
+{
+	vector<string> buildArrayResult;
+	int maxTargetValue = target[target.size() - 1];
+	for (int i = 1, j = 0; i <= maxTargetValue && j < target.size(); i++)
+	{
+		if (i != target[j])
+		{
+			buildArrayResult.push_back("Push");
+			buildArrayResult.push_back("PoP");
+		}
+		else
+		{
+			buildArrayResult.push_back("Push");
+			j++;
+		}
+	}
+
+	return buildArrayResult;
+}
+
+static int smallestKK = 0;
+
+void Solution::quickSort(vector<int> & arr, int left, int right)
+{
+	if (right == smallestKK - 1 || left == smallestKK)
+	{
+		return;
+	}
+	if (left >= right)
+	{
+		return;
+	}
+	//挖出一个坑
+	int benchmark = arr[left];
+	int tempLeft = left;
+	int tempRight = right;
+	while (left != right)
+	{
+		while (benchmark <= arr[right] && left != right)
+		{
+			right--;
+		}
+		if (left < right)
+		{
+			arr[left] = arr[right];
+		}
+		while (benchmark >= arr[left] && left != right)
+		{
+			left++;
+		}
+		if (left < right)
+		{
+			arr[right] = arr[left];
+		}
+	}
+	arr[left] = benchmark;
+	quickSort(arr, tempLeft, left);
+	quickSort(arr, left + 1, tempRight);
+}
+
+bool Solution::isPossibleDivide(vector<int>& nums, int k)
+{
+	int flag = 0;
+	bool isIncrease = true;
+
+	for (int i = 0; i < nums.size(); i++)
+	{
+		for (int j = i; j < k + i - 1 && j < nums.size() - 1; j++)
+		{
+			if (j == i)
+			{
+				if (nums[j] - nums[j + 1] == 1)
+				{
+					isIncrease = false;
+				}
+				else if (nums[j] - nums[j + 1] == -1)
+				{
+					isIncrease = true;
+				}
+				else
+				{
+					break;
+				}
+			}
+			else
+			{
+				if (isIncrease == false && nums[j] - nums[j + 1] != 1)
+				{
+					break;
+				}
+
+				if (isIncrease == true && nums[j] - nums[j + 1] != -1)
+				{
+					break;
+				}
+
+				if (j == k + i - 2)
+				{
+					flag++;
+				}
+			}
+		}
+	}
+
+	return flag > 1;
+}
+
+int Solution::exchangeBits(int num)
+{
+	int odd = num & 0xaaaaaaaa;
+	int even = num & 0x55555555;
+	
+	odd = odd >> 1;
+	even = even << 1;
+
+	return odd | even;
+}
+
+string Solution::serialize(TreeNode * root)
+{
+	std::queue<TreeNode *> tempQueue;
+	TreeNode *front;
+	std::string serializeString;
+
+	do 
+	{
+		if (nullptr == root)
+		{
+			break;
+		}
+		
+		tempQueue.push(root);
+		
+		while (!tempQueue.empty())
+		{
+			front = tempQueue.front();
+			if (front)
+			{
+				serializeString.append(",").append(std::to_string(front->val));
+			}
+			else
+			{
+				serializeString.append(",null");
+			}
+			tempQueue.pop();
+			
+			if (front)
+			{
+				if (front->left)
+				{
+					tempQueue.push(front->left);
+				}
+				else
+				{
+					tempQueue.push(nullptr);
+				}
+
+				if (front->right)
+				{
+					tempQueue.push(front->right);
+				}
+				else
+				{
+					tempQueue.push(nullptr);
+				}
+			}
+		}
+
+	} while (false);
+	
+	serializeString.at(0) = '[';
+	serializeString.append("]");
+	return serializeString;
+}
+
+TreeNode * Solution::deserialize(string data)
+{
+	string temp = data.substr(1, data.size()-2);
+	/*int width = 1;
+	int totalWidth = 0;
+	while (totalWidth < )
+
+	{
+	}*/
+
+	return nullptr;
+}
+
+vector<int> Solution::smallestK(vector<int>& arr, int k)
+{
+	vector<int> smallestKResult;
+	smallestKK = k;
+	quickSort(arr, 0, arr.size() - 1);
+
+	for (int i = 0; i < k; i++)
+	{
+		smallestKResult.push_back(arr[i]);
+	}
+
+	return smallestKResult;
 }

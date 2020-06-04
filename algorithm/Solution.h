@@ -43,8 +43,51 @@ public:
 	int  NumberOf1(long n);
 
 	//序列化与反序列化二叉树
-	char* Serialize(TreeNode *root);
+	string Serialize(TreeNode *root);
 	TreeNode* Deserialize(char *str);
+
+	//反转链表
+	ListNode* ReverseList(ListNode* pHead);
+
+	//给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方
+	double Power(double base, int exponent);
+
+	//调整数组顺序使奇数位于偶数前面
+	void reOrderArray(vector<int> &array);
+
+	//输入一个链表，输出该链表中倒数第k个结点
+	ListNode* FindKthToTail(ListNode* pListHead, unsigned int k);
+
+	//给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null
+	ListNode* EntryNodeOfLoop(ListNode* pHead);
+
+	//你正在使用一堆木板建造跳水板。有两种类型的木板，其中长度较短的木板长度为shorter，长度较长的木板长度为longer。你必须正好使用k块木板。编写一个方法，生成跳水板所有可能的长度
+	vector<int> divingBoard(int shorter, int longer, int k);
+
+	//在一个 n * m 的二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数
+	bool findNumberIn2DArray(vector<vector<int>>& matrix, int target);
+
+	//用栈操作构建数组
+	vector<string> buildArray(vector<int>& target, int n);
+
+	//设计一个算法，找出数组中最小的k个数。以任意顺序返回这k个数均可
+	vector<int> smallestK(vector<int>& arr, int k);
+
+	//快速排序
+	void quickSort(vector<int> & arr, int left, int right);
+	
+	//划分数组为连续数字的集合
+	bool isPossibleDivide(vector<int>& nums, int k);
+
+	//int exchangeBits(int num)
+	int exchangeBits(int num);
+
+	//leetcode二叉树的序列化与反序列化
+	string serialize(TreeNode* root);
+	TreeNode* deserialize(string data);
+
+	//冒泡排序
+
 private:
 	stack<int> stack1;
 	stack<int> stack2;

@@ -4,6 +4,7 @@
 #include "ListNode.h"
 
 using namespace std;
+//using std::cout;
 
 bool create_new_list(ListNode ** headOut, int size)
 {

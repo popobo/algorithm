@@ -1,13 +1,41 @@
 #include "Solution.h"
 #include <iostream>
 #include <string.h>
+#include <string>
 #include "ListNode.h"
 #include "TreeNode.h"
 #include <cmath>
+#include <sstream>
+#include <utility>
 
 using namespace std;
 
 #define INT_MIN (-2147483647 - 1)
+
+int bubbleSort(int *arr, int len)
+{
+	if (nullptr == arr)
+	{
+		return -1;
+	}
+
+	int temp = 0;
+
+	for (int i = 0; i < len; i++)
+	{
+		for (int j = i + 1; j < len; j++)
+		{
+			if (arr[i] > arr[j])
+			{
+				temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+		}
+	}
+
+	return 0;
+}
 
 int main()
 {
@@ -37,8 +65,8 @@ int main()
 	vector<int> mid{ 4, 7 ,2, 1, 5, 3, 8, 6 };
 	TreeNode* root = solution.reConstructBinaryTree(pre,mid);
 	
-	print_tree(root);
-	*/
+	print_tree(root);*/
+	
 	
 	/*solution.push(1);
 	solution.push(2);
@@ -64,13 +92,58 @@ int main()
 
 	/*int result = solution.rectCover(2);*/
 
-	int input = 2147483648;
+	/*int input = 2147483648;
 
 	int result = solution.NumberOf1(INT_MIN);
 
-	cout << result << endl;
+	cout << result << endl;*/
 
-	system("pause");
+	/*cout << solution.Serialize(root) << endl;*/
+
+	//¼ÇµÃÊÍ·Åroot
+
+	/*ListNode *head = nullptr;
+	create_new_list(&head, 10);
+	print_listnode(head);
+	solution.ReverseList(head->next);
+	print_listnode(head);*/
+
+	/*vector<int> result{ 1, 2, 3, 4, 5, 6, 7 };
+
+	solution.reOrderArray(result);*/
+
+	/*ListNode *head = nullptr;
+	create_new_list(&head, 5);
+	print_listnode(head);
+	ListNode *temp = solution.FindKthToTail(head->next, 1);
+	print_listnode(temp);
+
+
+	vector<int> temp1;
+	int iTemp = static_cast<int>(temp1.size());
+	iTemp -= 10;
+	cout << iTemp << endl;*/
+
+	/*vector<int> temp{ 3, 4, 5, 6, 7, 1, 2 };
+	//solution.quickSort(temp, 0, temp.size() - 1);
+	vector<int> result = solution.smallestK(temp, 4);*/
+
+	/*vector<int> temp{ 3,2,1,2,3,4,3,4,5,9,10,11 };
+	solution.isPossibleDivide(temp, 3);*/
+
+	/*vector<int> pre{ 1, 2, 4, 7, 3, 5, 6, 8 };
+	vector<int> mid{ 4, 7 ,2, 1, 5, 3, 8, 6 };
+	TreeNode* root = solution.reConstructBinaryTree(pre,mid);
+	print_tree(root);
+
+	std::cout << solution.serialize(root) << std::endl;;
+	solution.deserialize(solution.serialize(root));
+	*/
+
+	/*int arr[]{ 4, 7 ,2, 1, 5, 3, 8, 6 };
+	bubbleSort(arr, sizeof(arr) / sizeof(arr[0]));*/
 	
+	system("pause");
+
 	return 0;
 }
