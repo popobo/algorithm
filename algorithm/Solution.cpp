@@ -750,6 +750,7 @@ void Solution::quickSort(vector<int> & arr, int left, int right)
 		}
 		if (left < right)
 		{
+			//把坑填上， 并挖一个新坑
 			arr[left] = arr[right];
 		}
 		while (benchmark >= arr[left] && left != right)
@@ -758,9 +759,11 @@ void Solution::quickSort(vector<int> & arr, int left, int right)
 		}
 		if (left < right)
 		{
+			//把坑填上， 并挖一个新坑
 			arr[right] = arr[left];
 		}
 	}
+	//填上最后一个坑
 	arr[left] = benchmark;
 	quickSort(arr, tempLeft, left);
 	quickSort(arr, left + 1, tempRight);
@@ -892,6 +895,114 @@ TreeNode * Solution::deserialize(string data)
 	}*/
 
 	return nullptr;
+}
+
+bool Solution::abbreviationEqual(std::string strSource, std::string strAbbrevi)
+{
+	if (strSource.size() == 0 || strAbbrevi.size() == 0)
+	{
+		return false;
+	}
+
+	char tempIntStr[1024] = { 0 };
+	int tempInt = 0;
+
+	int str1Index = 0;
+	//i18n
+	//r3c5l
+	//ri2c5l
+	for (int i = 0; i < strAbbrevi.size();)
+	{
+		if ((strAbbrevi[i] >= 'a' && strAbbrevi[i] <= 'z') && (strAbbrevi[i + 1] >= '0' &&  strAbbrevi[i + 1] <= '9'))
+		{
+			int k = 0;
+			for (int j = i + 1; j < strAbbrevi.size(); j++)
+			{
+				if (strAbbrevi[j] >= '0' &&  strAbbrevi[j] <= '9')
+				{
+					tempIntStr[k] = strAbbrevi[j];
+					k++;
+				}
+				else
+				{
+					tempInt = atoi(tempIntStr);
+					break;
+				}
+			}
+			if (strSource[str1Index] == strAbbrevi[i])
+			{
+				str1Index += tempInt + 1;
+				i += k + 1;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			if (strSource[str1Index] == strAbbrevi[i])
+			{
+				i++;
+				str1Index++;
+			}
+			else
+			{
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+int Solution::getDecimalValue(ListNode * head)
+{
+	if (head == nullptr) {
+		return -1;
+	}
+
+	ListNode * node = head->next;
+	int lengthOfList = 0;
+	while (node != nullptr) {
+		lengthOfList++;
+		if (node->val != 0 && node->val != 1) {
+			return -1;
+		}
+		node = node->next;
+	}
+
+	node = head->next;
+	int result = 0;
+	for (int i = 0; i < lengthOfList; ++i) {
+		result = (node->val << (lengthOfList - 1 - i)) + result;
+		node = node->next;
+	}
+
+	return result;
+}
+
+int Solution::getDecimalValue2(ListNode * head)
+{
+	ListNode * prev = nullptr;
+	ListNode * current = nullptr;
+	int result = 0;
+	int count = 0;
+	// reverse list
+	while (head != nullptr) {
+		current = head->next;
+		head->next = prev;
+		prev = head;
+		head = current;
+	}
+	
+	while (prev != nullptr) {
+		int temp = prev->val << count;
+		result = result | temp;
+		count++;
+		prev = prev->next;
+	}
+
+	return result;
 }
 
 vector<int> Solution::smallestK(vector<int>& arr, int k)

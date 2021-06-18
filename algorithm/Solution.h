@@ -87,6 +87,17 @@ public:
 	TreeNode* deserialize(string data);
 
 	//ц╟ещеепР
+	
+	//internationalization
+	//i18n
+	//
+	//ringcentral
+	//r3c5l
+	bool abbreviationEqual(std::string strSource, std::string strAbbrevi);
+
+	int getDecimalValue(ListNode * head);
+
+	int getDecimalValue2(ListNode * head);
 
 private:
 	stack<int> stack1;

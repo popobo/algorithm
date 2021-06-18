@@ -143,6 +143,14 @@ int main()
 	/*int arr[]{ 4, 7 ,2, 1, 5, 3, 8, 6 };
 	bubbleSort(arr, sizeof(arr) / sizeof(arr[0]));*/
 	
+	// cout << solution.abbreviationEqual("international", "u11l");
+
+    ListNode *head = nullptr;
+	int array[] = { 1, 0, 1 };
+	createSpecifiedList(&head, array, sizeof(array) / sizeof(array[0]));
+	int result = solution.getDecimalValue(head);
+	result = solution.getDecimalValue2(head->next);
+
 	system("pause");
 
 	return 0;

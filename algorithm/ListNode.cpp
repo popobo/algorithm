@@ -35,6 +35,29 @@ bool create_new_list(ListNode ** headOut, int size)
 	return true;
 }
 
+bool createSpecifiedList(ListNode ** headOut, int array[], int length)
+{
+	ListNode * head = new ListNode(HEAD_VALUE);
+	if (nullptr == head) {
+		return false;
+	}
+	ListNode * pre = head;
+	ListNode * born = nullptr;
+
+	for (int i = 0; i < length; ++i) {
+		born = new ListNode(array[i]);
+		if (nullptr == born) {
+			return false;
+		}
+		pre->next = born;
+		pre = born;
+	}
+
+	*headOut = head;
+
+	return true;
+}
+
 void print_listnode(ListNode *head) 
 {
 	if (nullptr == head)

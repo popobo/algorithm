@@ -11,4 +11,5 @@ typedef struct ListNode
 }ListNode;
 
 bool create_new_list(ListNode** head, int size);
+bool createSpecifiedList(ListNode ** head, int array[], int length);
 void print_listnode(ListNode *head);
