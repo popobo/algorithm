@@ -151,8 +151,11 @@ int main()
 // 	int result = solution.getDecimalValue(head);
 // 	result = solution.getDecimalValue2(head->next);
 
-	std::vector<std::vector<int>> test = { {3,7,8}, {9,11, 13}, {15, 16, 17} };
-	auto result = solution.luckyNumbers(test);
+// 	std::vector<std::vector<int>> test = { {3,7,8}, {9,11, 13}, {15, 16, 17} };
+// 	auto result = solution.luckyNumbers(test);
+	
+	std::vector<std::vector<int>> test = { {1,2,3}, {4, 5, 6}, {7, 8, 9} };
+	int result = solution.diagonalSum(test);
 
 	system("pause");
 

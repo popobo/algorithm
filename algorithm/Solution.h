@@ -101,6 +101,8 @@ public:
 
 	vector<int> luckyNumbers(vector<vector<int>>& matrix);
 
+	int diagonalSum(vector<vector<int>>& mat);
+
 private:
 	stack<int> stack1;
 	stack<int> stack2;

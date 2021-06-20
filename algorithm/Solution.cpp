@@ -1038,6 +1038,28 @@ vector<int> Solution::luckyNumbers(vector<vector<int>>& matrix)
 	return result;
 }
 
+int Solution::diagonalSum(vector<vector<int>>& mat)
+{
+	if (mat.size() == 0 || mat[0].size() == 0) {
+		return 0;
+	}
+	if (mat.size() != mat[0].size()) {
+		return 0;
+	}
+
+	int rowCount = mat.size();
+	int result = 0;
+	for (int i = 0; i < rowCount; ++i) {
+		result = result + mat[i][i] + mat[i][rowCount - i - 1];
+	}
+
+	if (rowCount % 2 == 1) {
+		result -= mat[rowCount / 2][rowCount / 2];
+	}
+
+	return result;
+}
+
 vector<int> Solution::smallestK(vector<int>& arr, int k)
 {
 	vector<int> smallestKResult;
