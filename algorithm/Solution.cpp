@@ -1005,6 +1005,39 @@ int Solution::getDecimalValue2(ListNode * head)
 	return result;
 }
 
+vector<int> Solution::luckyNumbers(vector<vector<int>>& matrix)
+{
+	int rowCount = matrix.size();
+	int columnCount = matrix[0].size();
+	int minInRow = 0;
+	int columnIndex = 0;
+	bool isMinInRowMaxInCol = true;
+	vector<int> result;
+
+	for (int i = 0; i < rowCount; ++i) {
+		minInRow = matrix[i][0];
+		columnIndex = 0;
+		bool isMinInRowMaxInCol = true;
+		for (int j = 1; j < columnCount; ++j) {
+			if (minInRow > matrix[i][j]) {
+				minInRow = matrix[i][j];
+				columnIndex = j;
+			}
+		}
+		for (int k = 0; k < rowCount; ++k) {
+			if (minInRow < matrix[k][columnIndex]) {
+				isMinInRowMaxInCol = false;
+			}
+		}
+
+		if (isMinInRowMaxInCol) {
+			result.push_back(minInRow);
+		}
+	}
+
+	return result;
+}
+
 vector<int> Solution::smallestK(vector<int>& arr, int k)
 {
 	vector<int> smallestKResult;

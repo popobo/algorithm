@@ -118,11 +118,13 @@
     <ClCompile Include="ListNode.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Solution.cpp" />
+    <ClCompile Include="tool.cpp" />
     <ClCompile Include="TreeNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListNode.h" />
     <ClInclude Include="Solution.h" />
+    <ClInclude Include="tool.h" />
     <ClInclude Include="TreeNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

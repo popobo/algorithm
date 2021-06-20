@@ -99,6 +99,8 @@ public:
 
 	int getDecimalValue2(ListNode * head);
 
+	vector<int> luckyNumbers(vector<vector<int>>& matrix);
+
 private:
 	stack<int> stack1;
 	stack<int> stack2;
