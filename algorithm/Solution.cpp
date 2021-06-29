@@ -1060,6 +1060,25 @@ int Solution::diagonalSum(vector<vector<int>>& mat)
 	return result;
 }
 
+string Solution::replaceDigits(string s)
+{
+	string result;
+	for (int i = 0; i < s.length(); ++i) {
+		if (i % 2 == 0) {
+			if (s[i] > 'z' || s[i] < 'a') {
+				return string();
+			}
+			result.push_back(s[i]);
+		} else {
+			if (s[i] > '9' || s[i] < '0') {
+				return string();
+			}
+			result.push_back(s[i - 1] + (s[i] - '0'));
+		}
+	}
+	return result;
+}
+
 vector<int> Solution::smallestK(vector<int>& arr, int k)
 {
 	vector<int> smallestKResult;

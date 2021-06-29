@@ -103,6 +103,8 @@ public:
 
 	int diagonalSum(vector<vector<int>>& mat);
 
+	string replaceDigits(string s);
+
 private:
 	stack<int> stack1;
 	stack<int> stack2;
