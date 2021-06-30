@@ -105,6 +105,8 @@ public:
 
 	string replaceDigits(string s);
 
+	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);
+
 private:
 	stack<int> stack1;
 	stack<int> stack2;

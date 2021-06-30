@@ -154,8 +154,18 @@ int main()
 // 	std::vector<std::vector<int>> test = { {3,7,8}, {9,11, 13}, {15, 16, 17} };
 // 	auto result = solution.luckyNumbers(test);
 	
-	std::vector<std::vector<int>> test = { {1,2,3}, {4, 5, 6}, {7, 8, 9} };
-	int result = solution.diagonalSum(test);
+// 	std::vector<std::vector<int>> test = { {1,2,3}, {4, 5, 6}, {7, 8, 9} };
+// 	int result = solution.diagonalSum(test);
+
+// 	int array1[] = { 1, 0, 1 };
+// 	int array2[] = { 1, 0, 1 };
+	int array1[] = { 2, 4, 3 };
+	int array2[] = { 5, 6, 4 };
+	ListNode *head1 = nullptr;
+	ListNode *head2 = nullptr;
+	createSpecifiedList(&head1, array1, sizeof(array1) / sizeof(array1[0]));
+	createSpecifiedList(&head2, array2, sizeof(array2) / sizeof(array2[0]));
+	solution.addTwoNumbers(head1->next, head2->next);
 
 	system("pause");
 

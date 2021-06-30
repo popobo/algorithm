@@ -1079,6 +1079,45 @@ string Solution::replaceDigits(string s)
 	return result;
 }
 
+ListNode * Solution::addTwoNumbers(ListNode * l1, ListNode * l2)
+{
+	if (l1 == nullptr || l2 == nullptr) {
+		return nullptr;
+	}
+
+	int carry = 0;
+	ListNode * head = nullptr;
+	ListNode * result = nullptr;
+
+	while (l1 != nullptr || l2 != nullptr) {
+		int addResult = (l1 ? l1->val : 0) + (l2 ? l2->val : 0) + carry;
+		carry = 0;
+		if (addResult - 10 >= 0) {
+			addResult = addResult - 10;
+			carry = 1;
+		}
+		
+		if (!result) {
+			result = new ListNode(addResult);
+			head = result;
+		} else {
+			ListNode * newNode = new ListNode(addResult);
+			result->next = newNode;
+			result = result->next;
+		}
+
+		l1 = l1 ? l1->next : nullptr;
+		l2 = l2 ? l2->next : nullptr;
+	}
+
+	if (1 == carry) {
+		ListNode * newNode = new ListNode(carry);
+		result->next = newNode;
+	}
+
+	return head;
+}
+
 vector<int> Solution::smallestK(vector<int>& arr, int k)
 {
 	vector<int> smallestKResult;
