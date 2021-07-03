@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 #include <queue>
+#include <map>
 #include "Solution.h"
 
 using namespace std;
@@ -1116,6 +1117,44 @@ ListNode * Solution::addTwoNumbers(ListNode * l1, ListNode * l2)
 	}
 
 	return head;
+}
+
+vector<int> Solution::twoSum(vector<int>& nums, int target)
+{
+	if (nums.size() < 2) {
+		return vector<int>();
+	}
+
+	vector<int> result;
+
+	for (int i = 0; i < nums.size(); ++i) {
+		for (int j = i + 1; j < nums.size(); ++j) {
+			if ((nums[i] + nums[j]) == target) {
+				result.push_back(i);
+				result.push_back(j);
+				return result;
+			}
+		}
+	}
+
+	return result;
+}
+
+vector<int> Solution::twoSumBest(vector<int>& nums, int target)
+{
+	map<int, int> hashTable;
+	vector<int> result(2);
+
+	for (int i = 0; i < nums.size(); ++i) {
+		if (hashTable.count(target - nums[i]) > 0) {
+			result[0] = hashTable[target - nums[i]];
+			result[1] = i;
+			break;
+		}
+		hashTable[nums[i]] = i;
+	}
+
+	return result;
 }
 
 vector<int> Solution::smallestK(vector<int>& arr, int k)

@@ -107,6 +107,10 @@ public:
 
 	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);
 
+	vector<int> twoSum(vector<int>& nums, int target);
+
+	vector<int> twoSumBest(vector<int>& nums, int target);
+
 private:
 	stack<int> stack1;
 	stack<int> stack2;
